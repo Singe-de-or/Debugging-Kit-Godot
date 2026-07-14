@@ -49,7 +49,7 @@ Now you fill in a JSON config file:
 
 The engine doesn't know or care about your game's logic. It just presses buttons and watches properties. If a property goes out of bounds, it yells at you.
 
-## Three Modes
+## Four Modes
 
 **Mode 1: Quick** (~3 seconds)
 - Scans your code for obvious mistakes
@@ -67,6 +67,12 @@ The engine doesn't know or care about your game's logic. It just presses buttons
 - All of the above
 - Plus deep analysis of test results
 - For when you want to know everything that's broken
+
+**Mode 4: Validate** (~1 second)
+- Checks `debug_config.json` for errors before running tests
+- Verifies input actions, autoloads, Godot executable, invariant bounds
+- Catches config typos fast
+- Run this before Mode 1 if you just edited the config
 
 ## Files
 
@@ -145,16 +151,22 @@ Events Logged: 127
 
 See `DESIGN.md` for the full philosophy breakdown. TL;DR: this tool survives feature additions because it tests invariants, not mechanics.
 
-## When to Use This
+## When to Use Each Mode
 
-| Scenario | Use? | Why |
-|----------|------|-----|
-| Before committing code | ✅ | Catches syntax/config mistakes fast |
-| After adding a feature | ✅ | Verifies new feature didn't break invariants |
-| Before a release | ✅ | Deep analysis of overall stability |
-| Automated CI/CD | ✅ | Designed to work in pipelines |
-| Manual gameplay testing | ❌ | This isn't a replacement for that |
-| Testing game mechanics ("jump height") | ⚠️ | Not designed for it; won't work well |
+| Mode | When | Why |
+|------|------|-----|
+| Validate | After editing `debug_config.json` | Catch typos and config errors before wasting time on tests |
+| Quick | Before committing code | Catches syntax/config mistakes fast (~3 seconds) |
+| Autoplay | After adding a feature | Verifies new feature didn't break invariants (~20 seconds) |
+| Full | Before a release | Deep analysis of overall stability (~30 seconds) |
+| Any | Automated CI/CD | All modes are designed to work in pipelines |
+
+## What It Can't Do
+
+❌ Test game-specific mechanics (e.g. "damage on-beat is doubled")  
+❌ Detect animation/visual bugs (it's monitoring numbers, not pixels)  
+❌ Test UI layout or interaction  
+❌ Replace manual gameplay testing
 
 ## What It Can't Do
 
@@ -171,6 +183,7 @@ These are acceptable limitations for a generic tool.
 - **HOW_TO_USER.md** — For humans: how to run tests, understand output, fix problems
 - **HOW_TO_CLAUDE.md** — For AIs: installation workflow, config fill-in, verification
 - **DESIGN.md** — Why we made decisions this way, trade-offs, philosophy
+- **examples/** — Reference configs for 2D platformer, rhythm game, puzzle game
 
 ## License
 

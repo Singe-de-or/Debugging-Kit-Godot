@@ -110,6 +110,8 @@ Look at `_detected_candidates.input_actions_defined`. These are all actions in `
 
 **This is the core of the testing system.** Invariants are numeric properties that should stay in specific bounds.
 
+**👀 TIP:** Check the `examples/` folder for reference configs (2D platformer, rhythm game, puzzle game). You don't need to copy them exactly, but they show you what good configs look like.
+
 **Read the player script carefully.** Look for:
 - Numeric variables with `clamp()` calls → suggests bounds
 - Exported `float` or `int` fields with `min_value`/`max_value` annotations → real bounds
@@ -190,7 +192,36 @@ The default is 20 seconds. If you want shorter/longer tests:
 
 20 seconds is usually enough. Don't go under 10 (too little data) or over 60 (too long for CI).
 
-## Phase 3: Verify with Quick Mode
+## Phase 3: Validate the Config
+
+Before running the actual tests, validate the config for errors:
+
+```bash
+bash /path/to/target/.claude/skills/debug-kit/driver.sh 4
+```
+
+or use the shorthand:
+
+```bash
+bash /path/to/target/.claude/skills/debug-kit/driver.sh --validate
+```
+
+**Expected output:**
+
+```
+=== Validating Configuration ===
+
+✅ Config is valid!
+```
+
+If validation fails, you'll see errors like:
+- `Input action not defined in project.godot: ui_foo` — Remove or fix the action
+- `Godot executable not found at: /path/to/Godot` — Update the path
+- `Invariant 'health': invalid bounds (min=100 > max=50)` — Swap min/max
+
+**Fix any errors before proceeding to Quick mode.**
+
+## Phase 4: Verify with Quick Mode
 
 Now test it:
 
@@ -223,7 +254,7 @@ If any check fails, the error message tells you what to fix:
 | `Required autoload not found: Bar` | `Bar` isn't an autoload; remove it from config or ask user to add it |
 | `Missing @onready for get_node()` | Project has a code quality issue unrelated to your config (user can fix or ignore) |
 
-## Phase 4: Hand It Back
+## Phase 5: Hand It Back
 
 Tell the user:
 

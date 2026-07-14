@@ -1,0 +1,35 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "This is an example config for a 2D platformer game. Modify player_group, input_actions_to_fuzz, and invariants to match your actual game.",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "player",
+  "input_actions_to_fuzz": ["ui_left", "ui_right", "ui_accept"],
+  "invariants": [
+    {
+      "property": "position.x",
+      "min": 0,
+      "max": 1920,
+      "note": "Keep player on screen horizontally"
+    },
+    {
+      "property": "position.y",
+      "min": -100,
+      "max": 1200,
+      "note": "Keep player mostly on screen vertically (allow some room for jumps)"
+    },
+    {
+      "property": "velocity.y",
+      "min": -1000,
+      "max": 1000,
+      "note": "Velocity shouldn't get crazy"
+    },
+    {
+      "property": "health",
+      "min": 0,
+      "max": 100,
+      "note": "Health stays in valid range"
+    }
+  ],
+  "required_autoloads": ["EventBus"],
+  "test_duration_seconds": 20
+}

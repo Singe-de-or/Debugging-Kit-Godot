@@ -1,0 +1,36 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "TURN-BASED / PUZZLE GAME EXAMPLE. This shows how to configure a turn-based game (like Sokoban, match-3, puzzle). Instead of position/velocity, we monitor game state (moves remaining, score, level). Read your actual GameState or PuzzleManager script.",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "",
+  "target_node": "GameState",
+  "input_actions_to_fuzz": ["ui_left", "ui_right", "ui_up", "ui_down", "ui_accept"],
+  "invariants": [
+    {
+      "property": "moves_remaining",
+      "min": 0,
+      "max": 100,
+      "note": "Moves left should never go negative; should be bounded"
+    },
+    {
+      "property": "score",
+      "min": 0,
+      "max": 999999,
+      "note": "Score should never decrease during a level"
+    },
+    {
+      "property": "level",
+      "min": 1,
+      "max": 100,
+      "note": "Level should stay within game bounds"
+    },
+    {
+      "property": "pieces_remaining",
+      "min": 0,
+      "max": 64,
+      "note": "Piece count should stay in bounds (depends on board size)"
+    }
+  ],
+  "required_autoloads": [],
+  "test_duration_seconds": 20
+}

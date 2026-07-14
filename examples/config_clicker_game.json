@@ -1,0 +1,30 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "CLICKER GAME EXAMPLE. This shows how to configure a click-based game (like a cookie clicker). Instead of monitoring a player's position, we monitor game state (score, clicks, resources, unlocked items). Read your actual MainLoop or GameManager script.",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "",
+  "target_node": "MainLoop",
+  "input_actions_to_fuzz": ["ui_accept"],
+  "invariants": [
+    {
+      "property": "score",
+      "min": 0,
+      "max": 999999999,
+      "note": "Score should never decrease; monitor it stays >= 0"
+    },
+    {
+      "property": "clicks_total",
+      "min": 0,
+      "max": 999999,
+      "note": "Total clicks counter should never decrease"
+    },
+    {
+      "property": "gold",
+      "min": 0,
+      "max": 999999,
+      "note": "Currency should stay within sane bounds"
+    }
+  ],
+  "required_autoloads": [],
+  "test_duration_seconds": 20
+}

@@ -1,0 +1,36 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "CARD GAME EXAMPLE. This shows how to configure a card game (like Solitaire, Deck Builder). Monitor hand size, deck size, mana/resources, and game state. Read your actual CardGame or HandManager script.",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "",
+  "target_node": "CardGame",
+  "input_actions_to_fuzz": ["ui_left", "ui_right", "ui_up", "ui_down", "ui_accept"],
+  "invariants": [
+    {
+      "property": "hand_size",
+      "min": 0,
+      "max": 13,
+      "note": "Cards in hand should stay within deck limits"
+    },
+    {
+      "property": "deck_size",
+      "min": 0,
+      "max": 52,
+      "note": "Cards left in deck should never exceed total deck size"
+    },
+    {
+      "property": "mana_current",
+      "min": 0,
+      "max": 10,
+      "note": "Current mana should be <= max mana"
+    },
+    {
+      "property": "score",
+      "min": 0,
+      "max": 99999,
+      "note": "Score should never go negative"
+    }
+  ],
+  "required_autoloads": [],
+  "test_duration_seconds": 20
+}

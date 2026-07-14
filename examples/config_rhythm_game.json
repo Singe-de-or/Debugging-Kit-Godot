@@ -1,0 +1,35 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "This is an example config for a rhythm game (like the Debugging Kit's original use case). Modify to match your actual game mechanics.",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "player",
+  "input_actions_to_fuzz": ["ui_left", "ui_right", "ui_up", "ui_down", "ui_accept"],
+  "invariants": [
+    {
+      "property": "position.x",
+      "min": 0,
+      "max": 1024,
+      "note": "Player stays on screen horizontally"
+    },
+    {
+      "property": "position.y",
+      "min": 0,
+      "max": 600,
+      "note": "Player stays on screen vertically"
+    },
+    {
+      "property": "energy",
+      "min": 0,
+      "max": 100,
+      "note": "Energy system stays in valid bounds"
+    },
+    {
+      "property": "weapon_level",
+      "min": 1,
+      "max": 5,
+      "note": "Weapon level stays between 1-5"
+    }
+  ],
+  "required_autoloads": ["BeatManager"],
+  "test_duration_seconds": 20
+}

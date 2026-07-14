@@ -1,0 +1,35 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "This is an example config for a puzzle game. Focus on game state invariants rather than physics (no velocity bounds, etc.).",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "player",
+  "input_actions_to_fuzz": ["ui_left", "ui_right", "ui_up", "ui_down", "ui_accept"],
+  "invariants": [
+    {
+      "property": "position.x",
+      "min": 0,
+      "max": 1280,
+      "note": "Player stays within level bounds"
+    },
+    {
+      "property": "position.y",
+      "min": 0,
+      "max": 720,
+      "note": "Player stays within level bounds"
+    },
+    {
+      "property": "moves_remaining",
+      "min": 0,
+      "max": 100,
+      "note": "Move counter stays valid"
+    },
+    {
+      "property": "score",
+      "min": 0,
+      "max": 999999,
+      "note": "Score doesn't go negative or overflow"
+    }
+  ],
+  "required_autoloads": [],
+  "test_duration_seconds": 20
+}

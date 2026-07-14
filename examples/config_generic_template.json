@@ -1,0 +1,18 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "GENERIC TEMPLATE. (1) For MOVEMENT games: use 'player_group' (group your player node is in). For OTHER games (clicker, puzzle, card): use 'target_node' (name of game state manager). (2) Read your actual project scripts to find numeric properties. (3) Determine bounds by reading code: clamp() calls, max values, screen size, etc. Do not copy-paste. Understand your game first. See examples/ for game-type-specific templates.",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "",
+  "target_node": "",
+  "input_actions_to_fuzz": [],
+  "invariants": [
+    {
+      "property": "REPLACE_WITH_ACTUAL_PROPERTY_NAME",
+      "min": 0,
+      "max": 100,
+      "note": "Read your project scripts to find numeric properties and realistic bounds"
+    }
+  ],
+  "required_autoloads": [],
+  "test_duration_seconds": 20
+}

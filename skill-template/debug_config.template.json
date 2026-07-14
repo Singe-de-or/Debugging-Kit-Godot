@@ -1,0 +1,18 @@
+{
+  "_detected_candidates": {
+    "possible_player_scripts": [],
+    "groups_found_in_scenes": [],
+    "input_actions_defined": [],
+    "autoloads_defined": [],
+    "viewport_size": {"width": 1024, "height": 600}
+  },
+  "_instructions": "Review the _detected_candidates above by reading the actual scripts in your project. Then fill in the fields below with your project-specific choices. Do not guess; open the scripts and understand the actual invariants.",
+  "godot_executable": "PUT_PATH_TO_GODOT_EXECUTABLE_HERE",
+  "player_group": "PUT_GROUP_NAME_HERE",
+  "input_actions_to_fuzz": [],
+  "invariants": [
+    {"property": "position.x", "min": 0, "max": 1024, "note": "example: keep player on screen horizontally"}
+  ],
+  "required_autoloads": [],
+  "test_duration_seconds": 20
+}

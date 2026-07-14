@@ -53,9 +53,33 @@ Or get fancy and specify the mode directly (hardcore mode):
 bash .claude/skills/debug-kit/driver.sh 1    # Quick
 bash .claude/skills/debug-kit/driver.sh 2    # Autoplay
 bash .claude/skills/debug-kit/driver.sh 3    # Full
+bash .claude/skills/debug-kit/driver.sh 4    # Validate config
+bash .claude/skills/debug-kit/driver.sh --validate   # Same as mode 4
 ```
 
 ## Understanding Test Output
+
+### Mode 0 (Validate Config) — Config Check
+
+Before running actual tests, validate your `debug_config.json`:
+
+```bash
+/debug-kit
+# Choose: 4 (or use --validate)
+```
+
+**Output:**
+```
+=== Validating Configuration ===
+
+✅ Config is valid!
+```
+
+**Translation:**
+- ✅ = Config looks good. Go run Quick/Autoplay mode.
+- ❌ = Something's wrong in the config (typo, missing value, etc.). Fix it and try again.
+
+This catches mistakes fast (under 1 second). Run this first if you just edited the config.
 
 ### Mode 1 (Quick) — Static Checks
 
@@ -228,6 +252,7 @@ Autoplay tried to run but didn't finish. It crashed. Or timed out. Or achieved s
 
 | Mode | When | What Probably Happens |
 |------|------|---|
+| Validate | After editing `debug_config.json` | Either "✅ Config is valid!" or "❌ Godot executable not found" |
 | Quick | Before committing code | Either "✓ All good" or a list of things you're doing wrong |
 | Autoplay | After adding a feature | Either "✅ No violations" or "❌ Health went to 999999" |
 | Full | Before a release | Either everything passes or you get therapy-grade analysis of your mistakes |
@@ -240,6 +265,12 @@ Edit `debug_config.json` when:
 - You add an autoload that matters (add to `required_autoloads`)
 - You move Godot and it vanishes (update `godot_executable`)
 
+**After editing, run Validate mode to catch typos:**
+```bash
+/debug-kit 4
+# or: /debug-kit --validate
+```
+
 You usually do **not** need to edit it when:
 - Adding new game features (the fuzz engine doesn't care what your game does)
 - Changing gameplay logic (it just presses buttons like a confused player)
@@ -249,13 +280,15 @@ You usually do **not** need to edit it when:
 ## Summary
 
 1. Install with an AI
-2. Run Quick to see if you've committed crimes against code
-3. Run Autoplay to see if your game can survive chaos
-4. Read the output — "Violations Found: 0" is the best thing you'll hear all week
-5. Fix whatever broke
-6. Run again
-7. Accept that the computer now finds your bugs before your players do.
-8. Move on
+2. Edit `debug_config.json` to match your game
+3. Run Validate (mode 4) to check for typos
+4. Run Quick (mode 1) to check for code quality issues
+5. Run Autoplay (mode 2) to see if your game can survive chaos
+6. Read the output — "Violations Found: 0" is the best thing you'll hear all week
+7. Fix whatever broke
+8. Run again (don't forget to Validate after editing the config!)
+9. Accept that the computer now finds your bugs before your players do
+10. Move on
 
 ---
 
