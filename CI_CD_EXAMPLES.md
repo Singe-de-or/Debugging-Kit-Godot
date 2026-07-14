@@ -24,12 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      
+
       - name: Run Debugging Kit Quick Mode
         run: |
           bash ./.claude/skills/debug-kit/driver.sh 1
