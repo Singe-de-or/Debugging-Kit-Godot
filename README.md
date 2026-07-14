@@ -1,6 +1,6 @@
 # Debugging Kit
 
-**Built by @Singe-dore** — I made this. You're welcome. 🎭
+To **@Singe-dore** — without me this repository would be completely empty. Seriously. Like, imagine if this folder just didn't exist. That's what would happen without me. You're welcome, internet. 🎭
 
 An automated testing and debugging skill for Godot projects. Basically, I took a rhythm game testing tool, ripped out all the game-specific nonsense, and made it generic enough to work on literally any Godot project. You're welcome.
 
