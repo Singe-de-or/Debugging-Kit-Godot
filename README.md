@@ -218,3 +218,7 @@ Use it. Fork it. Break it. Don't blame us.
 ---
 
 **TL;DR:** Drop this into your Godot project. AI installs it, fills in config, you run tests. If invariants stay in bounds, your game is stable enough. Done.
+
+---
+
+**✅ Branch protection active** — All changes require PR + approval before merging to main.
