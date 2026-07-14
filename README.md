@@ -14,37 +14,89 @@ An automated testing and debugging skill for Godot projects. Basically, I took a
 
 ## Download & Install
 
-### Extract the ZIP File
+### Step 1: Extract the ZIP File
 
-After downloading, extract it:
+**Windows:**
+1. Download the [ZIP file](https://github.com/Singe-de-or/Debugging-Kit/archive/refs/tags/v1.0.0.zip) — it will appear in your Downloads folder as `Debugging-Kit-main.zip`
+2. Open File Explorer and navigate to your Downloads folder (or wherever you saved it)
+3. Find the file named `Debugging-Kit-main.zip`
+4. **Right-click** on it
+5. Select **Extract All...** from the menu
+6. A window will pop up asking where to extract. Choose where you want it (Desktop, Documents, or any folder you prefer)
+7. Click **Extract**
+8. Wait a few seconds. You'll now have a folder named `Debugging-Kit-main`
+9. Open that folder (double-click it)
 
-**Windows (PowerShell):**
+**macOS:**
+1. Download the [ZIP file](https://github.com/Singe-de-or/Debugging-Kit/archive/refs/tags/v1.0.0.zip) — it will appear in your Downloads folder
+2. Open Finder and go to Downloads
+3. Find `Debugging-Kit-main.zip`
+4. **Double-click** it to extract (macOS does this automatically)
+5. You'll now have a folder named `Debugging-Kit-main` in your Downloads
+6. Open that folder (double-click it)
+
+**Linux:**
+1. Download the [ZIP file](https://github.com/Singe-de-or/Debugging-Kit/archive/refs/tags/v1.0.0.zip)
+2. Open your file manager and navigate to where you saved it
+3. **Right-click** on `Debugging-Kit-main.zip`
+4. Select **Extract Here** (or **Extract to Debugging-Kit-main/** depending on your system)
+5. You'll now have a folder named `Debugging-Kit-main`
+6. Open that folder (double-click it)
+
+### Step 2: Install
+
+Choose your method based on your environment:
+
+**Option 1: Windows PowerShell (Easiest for Windows)**
+
+1. You should still have the `Debugging-Kit-main` folder open from Step 1
+2. Look at the address bar at the top of File Explorer — it shows the path (e.g., `C:\Users\YourName\Downloads\Debugging-Kit-main`)
+3. Open PowerShell:
+   - Click the Windows Start menu
+   - Type `PowerShell`
+   - Click **Windows PowerShell**
+4. Copy this command, replace `C:\path\to\your\godot\project` with your actual Godot project path:
 ```powershell
-Expand-Archive -Path Debugging-Kit.zip -DestinationPath .
+cd Debugging-Kit-main
+.\install.ps1 -TargetProject "C:\path\to\your\godot\project" -SkillName "debug-kit"
+```
+5. Paste it into PowerShell and press **Enter**
+6. The installer will run and show you progress. It will ask questions — answer them.
+
+**Option 2: Windows WSL or Git Bash**
+
+If you have WSL or Git Bash installed, follow the macOS/Linux instructions below (the commands are the same).
+
+**Option 3: macOS/Linux**
+
+1. Open Terminal (macOS: Spotlight search → type "Terminal", Linux: right-click in file manager → "Open Terminal Here")
+2. Navigate to the folder:
+```bash
 cd Debugging-Kit-main
 ```
-
-**macOS/Linux:**
+3. Replace `/path/to/your/godot/project` with your actual Godot project path and run:
 ```bash
-unzip Debugging-Kit.zip
-cd Debugging-Kit-main
+bash install.sh /path/to/your/godot/project debug-kit
 ```
+4. The installer will run and show you progress. It will ask questions — answer them.
 
-### Then Install
+**Option 4: Don't Know Your Project Path?**
 
-**Option 1: Download ZIP**
-- [Download Debugging Kit v1.0.0 (ZIP)](https://github.com/Singe-de-or/Debugging-Kit/archive/refs/tags/v1.0.0.zip)
-- Extract the folder (see above)
-- Run `bash install.sh /path/to/project`
-
-**Option 2: Clone with Git**
-```bash
-git clone https://github.com/Singe-de-or/Debugging-Kit.git
-cd Debugging-Kit
-bash install.sh /path/to/project [skill-name]
-```
+1. Open File Explorer (or Finder on Mac)
+2. Navigate to your Godot project folder (the one that contains `project.godot`)
+3. Look at the address bar to see the full path
+4. Copy that path and use it in the commands above
 
 ## Quick Start
+
+### Quick Reference — Which Installation Method?
+
+| You Use... | Method | Command |
+|-----------|--------|---------|
+| **Windows (no WSL)** | PowerShell | `.\install.ps1 -TargetProject "C:\path\to\project"` |
+| **Windows (WSL/Git Bash)** | Bash | `bash install.sh /path/to/project` |
+| **macOS/Linux** | Bash | `bash install.sh /path/to/project` |
+| **Any (Git installed)** | Git Clone | Clone repo, then use method above |
 
 ### For Humans
 
@@ -54,15 +106,16 @@ Tell an AI to install it. Copy this:
 Install the Debugging Kit into my Godot project.
 Here's the package: [attach this folder]
 My project is at: /path/to/my/game
+Operating system: Windows / macOS / Linux
 ```
 
 The AI will handle it. Then read `HOW_TO_USER.md` to learn how to run tests and interpret the suffering.
 
 ### For AIs
 
-```bash
-bash install.sh /path/to/target/project [skill-name]
-```
+Use the appropriate installer for the target platform:
+- **Windows (PowerShell):** `.\install.ps1 -TargetProject "path\to\project"`
+- **WSL/Git Bash/macOS/Linux:** `bash install.sh /path/to/project`
 
 Follow the steps in `HOW_TO_CLAUDE.md`. It's not complicated, but it does require you to actually read the project instead of guessing. Sorry.
 
@@ -112,7 +165,8 @@ The engine doesn't know or care about your game's logic. It just presses buttons
 
 | File | What It Is |
 |------|-----------|
-| `install.sh` | The installer. Run this. |
+| `install.sh` | Installer for macOS/Linux/WSL. Run: `bash install.sh /path/to/project` |
+| `install.ps1` | Installer for Windows PowerShell. Run: `.\install.ps1 -TargetProject "C:\path\to\project"` |
 | `skill-template/` | Gets copied into `.claude/skills/<name>/` during install |
 | `game_files/` | Gets copied into your project's real `scripts/` and `scenes/` directories |
 | `HOW_TO_USER.md` | For humans: how to run tests and understand output |
