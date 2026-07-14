@@ -47,9 +47,12 @@ Follow **`HOW_TO_CLAUDE.md`** step by step:
 | `README.md` | Overview and quick start |
 | `HOW_TO_USER.md` | Instructions for humans using the tool |
 | `HOW_TO_CLAUDE.md` | Instructions for AIs installing it |
+| `DESIGN.md` | Philosophy and trade-offs |
+| `CI_CD_EXAMPLES.md` | GitHub Actions, GitLab CI, Docker, pre-commit hooks |
 | `install.sh` | The installer script |
 | `skill-template/` | Templates for the slash command (gets copied/renamed during install) |
 | `game_files/` | Game-side components (copied into the target project's scripts/ and scenes/) |
+| `examples/` | Config templates for different game types (platformer, clicker, puzzle, card game) |
 
 ## TL;DR
 

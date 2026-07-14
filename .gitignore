@@ -37,3 +37,30 @@ __pycache__/
 # Temporary files
 .tmp/
 *.bak
+/android/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Claude Code workflow
+.local/
+
+# Environment & secrets
+.env
+.env.local
+*.pem
+*.key
+
+# IDE
+.vscode/
+.idea/
+.fleet/
+.DS_Store
+
+# OS
+Thumbs.db
+*.swp
+*.swo
+Godot_v4.6.2-stable_mono_win64/

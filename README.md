@@ -183,6 +183,7 @@ These are acceptable limitations for a generic tool.
 - **HOW_TO_USER.md** — For humans: how to run tests, understand output, fix problems
 - **HOW_TO_CLAUDE.md** — For AIs: installation workflow, config fill-in, verification
 - **DESIGN.md** — Why we made decisions this way, trade-offs, philosophy
+- **CI_CD_EXAMPLES.md** — GitHub Actions, GitLab CI, Docker, pre-commit hooks
 - **examples/** — Generic config template with placeholder guidance for AIs to read your project and fill in real values
 
 ## License
