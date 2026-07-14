@@ -110,7 +110,7 @@ Look at `_detected_candidates.input_actions_defined`. These are all actions in `
 
 **This is the core of the testing system.** Invariants are numeric properties that should stay in specific bounds.
 
-**👀 TIP:** Check the `examples/` folder for reference configs (2D platformer, rhythm game, puzzle game). You don't need to copy them exactly, but they show you what good configs look like.
+**⚠️ DO NOT copy-paste from examples.** Read the actual project code first. The `examples/config_generic_template.json` is a structure template, not a blueprint for your specific game.
 
 **Read the player script carefully.** Look for:
 - Numeric variables with `clamp()` calls → suggests bounds
