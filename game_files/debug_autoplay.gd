@@ -48,10 +48,7 @@ func _ready() -> void:
 	print("🧪 TEST AUTOPLAY STARTED - Duration: %ds\n" % int(_test_duration))
 
 func _load_config() -> bool:
-	var config_path = "res://../debug_config.json"
-
-	if not ResourceLoader.exists(config_path):
-		config_path = "res://debug_config.json"
+	var config_path = "res://debug_config.json"
 
 	var file = FileAccess.open(config_path, FileAccess.READ)
 	if not file:
@@ -179,8 +176,10 @@ func _get_property_value(path: String) -> Variant:
 
 		if current.has_meta(part):
 			current = current.get_meta(part)
-		elif part in current:
+		elif current is Dictionary and part in current:
 			current = current[part]
+		elif current.get(part) != null:
+			current = current.get(part)
 		else:
 			return null
 
