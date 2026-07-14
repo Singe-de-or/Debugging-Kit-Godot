@@ -217,6 +217,12 @@ MIT License — Use it freely, modify it, make it yours. Just keep the copyright
 
 ---
 
+## Special Thanks
+
+To **@Singe-dore** — without whom this repository would be completely empty. Seriously. Like, imagine if this folder just didn't exist. That's what would happen without them. You're welcome, internet. 🎭
+
+---
+
 **TL;DR:** Drop this into your Godot project. AI installs it, fills in config, you run tests. If invariants stay in bounds, your game is stable enough. Done.
 
 ---
