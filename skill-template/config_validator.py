@@ -25,11 +25,15 @@ def validate_config(config, project_dir):
     errors = []
     warnings = []
 
-    # Check required fields
-    if "player_group" not in config:
-        errors.append("Missing 'player_group' field")
-    elif not config["player_group"] or config["player_group"] == "PUT_GROUP_NAME_HERE":
-        errors.append("'player_group' is not filled in")
+    # Check required fields - either player_group OR target_node must be set
+    has_player_group = "player_group" in config and config.get("player_group", "").strip()
+    has_target_node = "target_node" in config and config.get("target_node", "").strip()
+
+    if not has_player_group and not has_target_node:
+        errors.append("Either 'player_group' (for movement games) or 'target_node' (for other games) must be filled in")
+
+    if has_player_group and config.get("player_group") == "PUT_GROUP_NAME_HERE":
+        errors.append("'player_group' is still a placeholder - read your project and fill it in")
 
     if "input_actions_to_fuzz" not in config:
         errors.append("Missing 'input_actions_to_fuzz' field")

@@ -47,7 +47,29 @@ Next steps:
 3. Fill in the remaining placeholder fields...
 ```
 
-## Phase 2: Review and Fill the Config
+## Phase 2: Interview the User (if needed)
+
+Before filling the config, understand the game type. Ask:
+
+**If the game looks unfamiliar:**
+
+1. "Describe your game in one sentence" — Is it movement-based (platformer, top-down shooter), turn-based (puzzle, clicker), UI-driven (visual novel, deck builder)?
+2. "What's the main thing that changes during gameplay?" — Is it the player's position, a resource counter (gold, health, score), remaining turns, inventory size?
+3. "What should stay in valid bounds?" — What numeric properties matter for correctness?
+
+**Why ask?** The config depends on game type:
+- **Movement game:** Monitor `position.x`, `position.y`, `velocity`
+- **Click/Clicker:** Monitor `score`, `clicks`, `resources`, `level`
+- **Turn-based:** Monitor `turns_remaining`, `moves`, `board_state` (via piece positions)
+- **UI/Menu:** Monitor `selected_index`, `menu_state`, `gold`, `inventory_count`
+
+**Example responses to expect:**
+- "It's a tower defense game" → Monitor tower positions, health, gold
+- "It's a clicker" → Monitor score, clicks per second, upgrades unlocked
+- "It's a card game" → Monitor hand size, deck size, mana available
+- "It's a 2D platformer" → Monitor position, velocity, health
+
+## Phase 2.5: Review and Fill the Config
 
 ### Open debug_config.json
 
@@ -73,23 +95,25 @@ The generated file looks like:
 
 The `_detected_candidates` is the installer's best guess. Your job is to **review and fill in the actual fields** by reading the project.
 
-### Step 1: Verify the Player Script
+### Step 1: Identify the Node to Monitor
 
-Look at `_detected_candidates.possible_player_scripts`. These are all `.gd` files that extend `CharacterBody2D`/`3D`.
+This is the key decision. The "player" could mean different things:
+- **Movement game:** An actual player character (CharacterBody2D in a scene)
+- **Clicker:** A GameManager or MainLoop singleton
+- **Puzzle:** A Board manager or GameState node
+- **Card game:** A CardGame or HandManager node
 
-**Read the first one** (usually the player). Ask yourself: Is this the player? If unsure, ask the user: *"Is your player in `res://scripts/player.gd`?"*
+**For movement games:**
+- Look at `_detected_candidates.possible_player_scripts` (scripts extending CharacterBody2D/3D)
+- **Read the first one** and ask: Is this the player? If unsure, ask the user.
+- Verify the player node is in a group (check `scenes/main.tscn`, select Player node, check Groups panel)
+- **Fill in:** `"player_group": "player"` (or whatever group it's in)
 
-### Step 2: Verify the Player Group
-
-Look at `_detected_candidates.groups_found_in_scenes`. Check the player node in a scene — does it have a group?
-
-**Example:** Open `scenes/main.tscn`, select the Player node, check the Node panel on the right — is it in the `player` group?
-
-**Fill in:** `"player_group": "player"` (or whatever group the player is actually in)
-
-If the player isn't in any group, you have two choices:
-- Ask the user to add it to a group in the editor
-- Note that autoplay won't work and tell the user
+**For non-movement games (clicker, puzzle, turn-based):**
+- Look at `_detected_candidates.possible_target_scripts` (all scripts with numeric properties)
+- Ask the user: *"Which script tracks game state? Is it a GameManager, MainLoop, or something else?"*
+- You can use `target_node` instead: `"target_node": "GameManager"` (looks for any node by name, not by group)
+- **Fill in:** `"target_node": "GameManager"` and leave `player_group` empty or use whichever applies
 
 ### Step 3: Choose Input Actions to Fuzz
 
@@ -152,10 +176,10 @@ var viewport_width = 1024  # from project.godot
 ```
 
 **Rules for invariants:**
-- Pick properties that matter to correctness (health, position, ammo)
+- Pick properties that matter to correctness (position, velocity, health, resources — whatever your game actually has)
 - Not UI-only (HUD color, animation state)
 - Should have numeric bounds (not boolean, string, enum)
-- Dotted paths work: `position.x`, `velocity.y`, `weapon.ammo_current` (as long as they're navigable)
+- Dotted paths work: `position.x`, `velocity.y` (as long as they're navigable)
 
 ### Step 5: Verify Required Autoloads
 

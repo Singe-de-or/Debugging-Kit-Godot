@@ -47,23 +47,38 @@ I'll show you an interactive menu (arrow-key navigation) to select a mode. Then 
 
 Before running, you configure the testing system for your specific game via `debug_config.json` (created during install):
 
+**Movement-based game (platformer, shooter):**
 ```json
 {
   "player_group": "player",
+  "target_node": "",
   "input_actions_to_fuzz": ["ui_left", "ui_right", "ui_accept"],
   "invariants": [
     {"property": "position.x", "min": 0, "max": 1024},
     {"property": "health", "min": 0, "max": 100}
   ],
-  "required_autoloads": ["EventBus"],
   "test_duration_seconds": 20
 }
 ```
 
-- **player_group** — Group your player node belongs to (for finding it during testing)
+**Non-movement game (clicker, puzzle, card game):**
+```json
+{
+  "player_group": "",
+  "target_node": "GameState",
+  "input_actions_to_fuzz": ["ui_accept"],
+  "invariants": [
+    {"property": "score", "min": 0, "max": 999999},
+    {"property": "moves_remaining", "min": 0, "max": 100}
+  ],
+  "test_duration_seconds": 20
+}
+```
+
+- **player_group** — (Movement games) Group your player node belongs to
+- **target_node** — (Other games) Name of the node that tracks game state
 - **input_actions_to_fuzz** — Which input actions to randomly simulate
-- **invariants** — Numeric properties to monitor for violations (e.g. health should stay in bounds)
-- **required_autoloads** — Any critical autoloads that must exist
+- **invariants** — Numeric properties to monitor for violations
 - **test_duration_seconds** — How long to run autoplay simulation
 
 ### Mode Behavior
@@ -174,22 +189,30 @@ Events Logged: 127
 | Symptom | Fix |
 |---------|-----|
 | `Godot executable not found` | Update `godot_executable` in `debug_config.json` or ensure `godot` is in your PATH |
-| `Player not found` | Verify your player node is in the group specified in `debug_config.json` |
-| Input actions don't run | Check `input_actions_to_fuzz` in config matches actions defined in `project.godot` |
-| Invariants not logged | Ensure the property path (e.g. `position.x`, `health`) is correct and accessible on the player node |
-| Test log not found | Check that autoplay ran to completion (watch for "✅ Test complete!" message) |
-| Analysis fails | Run `python3 test_analyzer.py <log_file>` directly to see detailed parsing errors |
+| `Player not found in group` | You're using `player_group`; verify the player node is in that group in your scene |
+| `Target node not found` | You're using `target_node`; verify the node name matches exactly (case-sensitive) |
+| `Neither player_group nor target_node configured` | Fill in at least one: `player_group` (movement games) or `target_node` (other games) |
+| Input actions don't run | Check `input_actions_to_fuzz` matches actions defined in `project.godot` |
+| Invariants not logged | Ensure property paths (e.g. `position.x`, `score`) exist and are accessible on your node |
+| Test log not found | Autoplay didn't complete; check for errors in Godot output or invariant violations |
+| Analysis fails | Run `python3 test_analyzer.py <log_file>` directly to see detailed errors |
 
 ## How This Adapts to New Features
 
-The system works with any new features because it validates **invariants** instead of hardcoded mechanics:
+The system works with any new features because it validates **invariants** (numeric bounds) instead of mechanics:
 
-- **New weapon type?** — Autoplay fuzzes input actions blindly, invariants validate numeric properties stay in bounds
-- **New movement?** — Position tracking validates player stays in world
-- **New UI?** — Invariants can monitor any numeric field
-- **New game mode?** — As long as player node exists, autoplay keeps fuzzing
+**Movement games:**
+- **New weapon?** — Invariants check properties stay in bounds
+- **New animation?** — Doesn't matter; we monitor state, not visuals
+- **Camera changes?** — Adjust position bounds if needed
+- **New level?** — Position bounds may change; update if needed
 
-You never need to update tests when adding features — just adjust `debug_config.json` if new invariants matter, and autoplay keeps working with the same engine.
+**Clicker/Puzzle games:**
+- **New upgrade?** — Autoplay keeps fuzzing; state properties stay monitored
+- **New level type?** — Invariants still apply (moves, score, pieces)
+- **UI changes?** — Only affects input actions; invariants unchanged
+
+You rarely need to update tests when adding features. Occasionally adjust invariant bounds in `debug_config.json` if new max values change, then autoplay keeps working.
 
 ## Files
 

@@ -22,15 +22,18 @@ That's it. The AI will handle the rest. Or ask you clarifying questions. Lots of
 Set up Debugging Kit for my Godot project.
 Project location: /path/to/my/game
 Skill command name: debug-kit (becomes /debug-kit)
+Game type: [movement-based / clicker / puzzle / card-game / other]
 
 Please:
 1. Run install.sh
 2. Review the generated debug_config.json and its detected_candidates
-3. Fill in the config based on my actual game logic (ask me if unsure)
-4. Run Quick mode to verify
+3. Ask me questions if you need to understand the game
+4. Fill in the config based on my actual game logic
+5. Run Validate mode to check for errors
+6. Run Quick mode to verify
 ```
 
-The AI will appreciate the clarity. It might even respect you a little bit. Don't count on it.
+The AI will ask about your game type so it can pick the right approach (player_group for movement, target_node for everything else). Being specific about your game type helps it get the config right faster.
 
 ## How to Run Tests
 
@@ -55,6 +58,25 @@ bash .claude/skills/debug-kit/driver.sh 2    # Autoplay
 bash .claude/skills/debug-kit/driver.sh 3    # Full
 bash .claude/skills/debug-kit/driver.sh 4    # Validate config
 bash .claude/skills/debug-kit/driver.sh --validate   # Same as mode 4
+```
+
+## Understanding Your Config
+
+The Debugging Kit works for **any type of game**, so your config changes based on game type:
+
+| Game Type | Use This | Monitors |
+|-----------|----------|----------|
+| **Platformer / Top-Down Shooter** | `player_group: "player"` | Position, velocity, health |
+| **Clicker / Idle Game** | `target_node: "MainLoop"` | Score, clicks, gold |
+| **Puzzle / Board Game** | `target_node: "GameState"` | Moves, level, pieces |
+| **Card Game** | `target_node: "CardGame"` | Hand size, deck, mana |
+
+Don't have a clue which one is yours? Ask Claude (the AI). It'll ask you what your game does, then pick the right approach.
+
+Once the AI fills in your config, **run mode 4 (Validate)** to check for typos before running actual tests:
+```bash
+/debug-kit
+# Choose: 4 (Validate)
 ```
 
 ## Understanding Test Output

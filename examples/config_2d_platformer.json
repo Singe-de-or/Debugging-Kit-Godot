@@ -1,0 +1,42 @@
+{
+  "_detected_candidates": {},
+  "_instructions": "2D PLATFORMER EXAMPLE. This shows how to configure a movement-based game (platformer, top-down shooter, action game). We monitor the player node's position, velocity, and health. Read your actual player.gd script.",
+  "godot_executable": "/usr/bin/godot",
+  "player_group": "player",
+  "target_node": "",
+  "input_actions_to_fuzz": ["ui_left", "ui_right", "ui_up", "ui_accept"],
+  "invariants": [
+    {
+      "property": "position.x",
+      "min": -100,
+      "max": 1124,
+      "note": "Player X should stay near viewport (1024 wide); allow some overflow for camera pan"
+    },
+    {
+      "property": "position.y",
+      "min": -100,
+      "max": 700,
+      "note": "Player Y should stay near viewport (600 tall); allow some overflow"
+    },
+    {
+      "property": "velocity.x",
+      "min": -400,
+      "max": 400,
+      "note": "Horizontal velocity should stay within movement bounds"
+    },
+    {
+      "property": "velocity.y",
+      "min": -800,
+      "max": 800,
+      "note": "Vertical velocity should stay within jump/gravity bounds"
+    },
+    {
+      "property": "health",
+      "min": 0,
+      "max": 100,
+      "note": "Health should stay within game bounds"
+    }
+  ],
+  "required_autoloads": [],
+  "test_duration_seconds": 20
+}
