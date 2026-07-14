@@ -213,7 +213,7 @@ These are acceptable limitations for a generic tool.
 
 ## License
 
-Use it. Fork it. Break it. Don't blame us.
+MIT License — Use it freely, modify it, make it yours. Just keep the copyright notice. See `LICENSE` file for details.
 
 ---
 
