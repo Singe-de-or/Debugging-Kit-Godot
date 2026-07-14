@@ -10,6 +10,20 @@ An automated testing and debugging skill for Godot projects. Basically, we took 
 
 ✅ **Deep Analysis** (~30 seconds) — Analyzes test results and tells you everything that went wrong. Enjoy.
 
+## Download
+
+**Option 1: Download ZIP**
+- [Download Debugging Kit v1.0.0 (ZIP)](https://github.com/Singe-de-or/Debugging-Kit/archive/refs/tags/v1.0.0.zip)
+- Extract the folder
+- Run `bash install.sh /path/to/project`
+
+**Option 2: Clone with Git**
+```bash
+git clone https://github.com/Singe-de-or/Debugging-Kit.git
+cd Debugging-Kit
+bash install.sh /path/to/project [skill-name]
+```
+
 ## Quick Start
 
 ### For Humans
