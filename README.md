@@ -10,11 +10,29 @@ An automated testing and debugging skill for Godot projects. Basically, we took 
 
 ✅ **Deep Analysis** (~30 seconds) — Analyzes test results and tells you everything that went wrong. Enjoy.
 
-## Download
+## Download & Install
+
+### Extract the ZIP File
+
+After downloading, extract it:
+
+**Windows (PowerShell):**
+```powershell
+Expand-Archive -Path Debugging-Kit.zip -DestinationPath .
+cd Debugging-Kit-main
+```
+
+**macOS/Linux:**
+```bash
+unzip Debugging-Kit.zip
+cd Debugging-Kit-main
+```
+
+### Then Install
 
 **Option 1: Download ZIP**
 - [Download Debugging Kit v1.0.0 (ZIP)](https://github.com/Singe-de-or/Debugging-Kit/archive/refs/tags/v1.0.0.zip)
-- Extract the folder
+- Extract the folder (see above)
 - Run `bash install.sh /path/to/project`
 
 **Option 2: Clone with Git**
