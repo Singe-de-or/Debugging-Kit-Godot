@@ -1,6 +1,8 @@
 # Debugging Kit
 
-An automated testing and debugging skill for Godot projects. Basically, we took a rhythm game testing tool, ripped out all the game-specific nonsense, and made it generic enough to work on literally any Godot project. You're welcome.
+**Built by @Singe-dore** — I made this. You're welcome. 🎭
+
+An automated testing and debugging skill for Godot projects. Basically, I took a rhythm game testing tool, ripped out all the game-specific nonsense, and made it generic enough to work on literally any Godot project. You're welcome.
 
 ## What It Does
 
@@ -214,12 +216,6 @@ These are acceptable limitations for a generic tool.
 ## License
 
 MIT License — Use it freely, modify it, make it yours. Just keep the copyright notice. See `LICENSE` file for details.
-
----
-
-## Special Thanks
-
-To **@Singe-dore** — without whom this repository would be completely empty. Seriously. Like, imagine if this folder just didn't exist. That's what would happen without them. You're welcome, internet. 🎭
 
 ---
 
