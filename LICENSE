@@ -1,17 +1,24 @@
-MIT License
+Modified MIT License with Contribution Requirement
 
-Copyright (c) 2026 Singe-de-or
+Copyright (c) 2026 Singe-dore
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, and merge the Software, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+RESTRICTIONS:
+- You may NOT create independent repositories, distributions, or redistributions
+  of this software or its derivatives
+- You may NOT sublicense or sell copies of this software
+- All modifications must be contributed back to the original repository via
+  pull request. You are free to fork this repository, make changes within your
+  fork, and submit contributions
 
+CONDITIONS:
+- The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+DISCLAIMER:
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
